@@ -1,6 +1,35 @@
 // use std::cmp::Ordering;
 use std::collections::VecDeque;
 
+#[derive(Debug)]
+pub struct StrBuilder {
+    output: String
+}
+impl StrBuilder {
+    pub fn new() -> Self {
+        StrBuilder { output: String::new() }
+    }
+    pub fn traverse_preorder<T>(&mut self, node: Node<T>) 
+    where 
+        T: Copy + std::fmt::Debug
+    {
+        self.output.push_str(format!("{:?}\n", node.get_value()).as_str());
+        match node.left {
+            None => {},
+            Some(left) => self.traverse_preorder(*left)
+        }
+        match node.right {
+            None => {},
+            Some(right) => self.traverse_preorder(*right)
+        }
+    }
+}
+impl Default for StrBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[derive(Debug, PartialEq, PartialOrd, Default)]
 pub struct Node<T> {
     pub value: T,

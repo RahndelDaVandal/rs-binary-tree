@@ -1,10 +1,9 @@
 use tree::Node;
+use tree::StrBuilder;
 
 fn main() {
     let tree = Node::from(&[1,2,3,4]);
-    println!("{}", tree.get_value());
-    println!("{}", tree.get_left());
-    println!("{}", tree.get_right());
-    print!("\n\n\n");
-    println!("{:#?}", tree);
+    let mut s = StrBuilder::new();
+    s.traverse_preorder(tree);
+    println!("{:#?}", s);
 }
